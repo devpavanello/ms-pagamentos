@@ -1,0 +1,3 @@
+INSERT INTO tb_pagamento(valor, nome, numero_do_cartao, validade, codigo_de_seguranca, status, pedido_id, forma_de_pagamento_id) VALUES(5000, 'Enzo Fernandes Pavanello', '1458259674851697', '11/35', '789', 'CRIADO', 1, 2);
+INSERT INTO tb_pagamento(valor, nome, numero_do_cartao, validade, codigo_de_seguranca, status, pedido_id, forma_de_pagamento_id) VALUES(1200, 'Nicodemus C Souza', '1234567890123456', '12/30', '352', 'CRIADO', 2, 1);
+INSERT INTO tb_pagamento(valor, nome, numero_do_cartao, validade, codigo_de_seguranca, status, pedido_id, forma_de_pagamento_id) VALUES(3200, 'Neymar da Silva Santos Junior', '7894567890123456', '01/28', '546', 'CRIADO', 3, 2);
