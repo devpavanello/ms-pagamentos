@@ -40,9 +40,11 @@ public class PagamentoDTO {
     private Status status;
 
     @NotNull(message = "Pedido ID é obrigatorio")
+    @Positive(message = "O ID do pedido deve ser um número positivo")
     private Long pedidoId;
 
     @NotNull(message = "Forma de pagamento ID é obrigatorio")
+    @Positive(message = "O ID da forma de pagamento deve ser um número positivo")
     private Long formaDePagamentoId;
 
     public PagamentoDTO(Pagamento entity){

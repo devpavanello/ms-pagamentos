@@ -3,6 +3,7 @@ package com.github.devpavanello.ms_pagamento.controller;
 import com.github.devpavanello.ms_pagamento.dto.PagamentoDTO;
 import com.github.devpavanello.ms_pagamento.service.PagamentoService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,5 +49,11 @@ public class PagamentoController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PagamentoDTO> update(@PathVariable @NotNull Long id, @RequestBody @Valid PagamentoDTO dto){
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 }

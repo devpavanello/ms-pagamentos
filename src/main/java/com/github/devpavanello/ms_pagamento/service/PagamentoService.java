@@ -4,6 +4,7 @@ import com.github.devpavanello.ms_pagamento.dto.PagamentoDTO;
 import com.github.devpavanello.ms_pagamento.model.Pagamento;
 import com.github.devpavanello.ms_pagamento.model.Status;
 import com.github.devpavanello.ms_pagamento.repository.PagamentoRepository;
+import com.github.devpavanello.ms_pagamento.service.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public class PagamentoService {
     @Transactional(readOnly = true)
     public PagamentoDTO findById(Long id){
         Pagamento entity = repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Recurso não encontrado")
+                () -> new ResourceNotFoundException("Recurso não encontrado! Id: " + id)
         );
         return new PagamentoDTO(entity);
     }
@@ -63,12 +64,25 @@ public class PagamentoService {
     @Transactional
     public void delete (Long id){
         if(!repository.existsById(id)){
-            throw new EntityNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException("Recurso não encontrado! Id: " + id);
         }
         try {
             repository.deleteById(id);
         }catch(EntityNotFoundException e){
-            throw new EntityNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException("Recurso não encontrado! Id: " + id);
+        }
+    }
+
+    @Transactional
+    public PagamentoDTO update (Long id, PagamentoDTO dto){
+        try{
+            //não vai para DB, objeto monitorado pelo JPA
+            Pagamento entity = repository.getReferenceById(id);
+            copyDtoToEntity(dto, entity);
+            entity = repository.save(entity);
+            return new PagamentoDTO(entity);
+        }catch(EntityNotFoundException e){
+            throw new ResourceNotFoundException("Recurso não encontrado! Id: " + id);
         }
     }
 
