@@ -1,0 +1,18 @@
+package com.github.devpavanello.ms_pagamento.tests;
+
+import com.github.devpavanello.ms_pagamento.model.Pagamento;
+import com.github.devpavanello.ms_pagamento.model.Status;
+
+import java.math.BigDecimal;
+
+//Classe para instanciar objetos
+public class Factory {
+
+    public static Pagamento createPagamento(){
+
+        Pagamento pagamento = new Pagamento(1L, BigDecimal.valueOf(32.25),
+                "Bach", "2365145936541245", "07/28", "585",
+                Status.CRIADO, 1L, 2L);
+        return pagamento;
+    }
+}
