@@ -44,7 +44,6 @@ public class PagamentoController {
         return ResponseEntity.created(uri).body(dto);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<PagamentoDTO> update(@PathVariable @NotNull Long id,
                                                @RequestBody @Valid PagamentoDTO dto ){
